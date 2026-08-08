@@ -1,0 +1,9 @@
+/vendor
+/.phpunit.cache
+/.pest
+/storage/*.key
+.env
+composer.lock
+node_modules
+dist
+docs/
