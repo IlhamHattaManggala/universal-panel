@@ -120,6 +120,32 @@
 @php 
     $panelPrefix = request()->is('superadmin*') ? 'superadmin' : 'admin'; 
     $panelTitle = $panelPrefix === 'superadmin' ? 'Superadmin Panel' : 'Universal Panel';
+
+    // Base navigation items
+    $searchItems = [
+        ['title' => 'Dashboard Overview', 'url' => "/{$panelPrefix}", 'category' => 'Navigation', 'icon' => 'dashboard'],
+        ['title' => 'Analytics & Reports', 'url' => "/{$panelPrefix}/analytics", 'category' => 'Navigation', 'icon' => 'analytics'],
+        ['title' => 'Posts & Articles', 'url' => "/{$panelPrefix}/posts", 'category' => 'Content', 'icon' => 'posts'],
+        ['title' => 'Pages Management', 'url' => "/{$panelPrefix}/pages", 'category' => 'Content', 'icon' => 'pages'],
+        ['title' => 'Media Library', 'url' => "/{$panelPrefix}/media", 'category' => 'Content', 'icon' => 'media'],
+        ['title' => 'All Users', 'url' => "/{$panelPrefix}/resources/users", 'category' => 'Users', 'icon' => 'users'],
+        ['title' => 'Roles Management', 'url' => "/{$panelPrefix}/roles", 'category' => 'Users', 'icon' => 'roles'],
+        ['title' => 'Permissions Matrix', 'url' => "/{$panelPrefix}/permissions", 'category' => 'Users', 'icon' => 'permissions'],
+        ['title' => 'Sentinel WAF Security', 'url' => "/{$panelPrefix}/security", 'category' => 'System', 'icon' => 'security'],
+        ['title' => 'System Settings', 'url' => "/{$panelPrefix}/settings", 'category' => 'System', 'icon' => 'settings'],
+    ];
+
+    // Dynamically append all registered panel resources
+    $registeredResources = \Manggala\UniversalPanel\Facades\Panel::getResources();
+    foreach ($registeredResources as $slug => $resClass) {
+        $label = method_exists($resClass, 'getLabel') ? $resClass::getLabel() : ucfirst($slug);
+        $searchItems[] = [
+            'title' => "Resource: {$label}",
+            'url' => "/{$panelPrefix}/resources/{$slug}",
+            'category' => 'Resource',
+            'icon' => 'resource',
+        ];
+    }
 @endphp
 <body class="h-full bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased flex flex-col transition-colors duration-200 overflow-hidden">
     <header class="h-11 bg-white dark:bg-[#1d2327] border-b border-slate-200 dark:border-[#2c3338] text-slate-800 dark:text-slate-200 px-4 flex items-center justify-between text-xs select-none relative z-30 transition-colors shrink-0">
@@ -371,46 +397,35 @@
                 <kbd class="px-1.5 py-0.5 text-[10px] font-mono text-slate-400 bg-slate-100 dark:bg-[#252c31] border border-slate-300 dark:border-slate-700 rounded">ESC</kbd>
             </div>
             <div id="spotlight-results" class="max-h-72 overflow-y-auto p-2 space-y-1 no-scrollbar text-xs">
-                <a href="/{{ $panelPrefix }}" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
-                    <span class="flex items-center gap-2">📊 Dashboard Overview</span>
-                    <span class="text-[10px] text-slate-400">Navigation</span>
-                </a>
-                <a href="/{{ $panelPrefix }}/analytics" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
-                    <span class="flex items-center gap-2">📈 Analytics & Reports</span>
-                    <span class="text-[10px] text-slate-400">Navigation</span>
-                </a>
-                <a href="/{{ $panelPrefix }}/posts" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
-                    <span class="flex items-center gap-2">📝 Posts & Articles</span>
-                    <span class="text-[10px] text-slate-400">Content</span>
-                </a>
-                <a href="/{{ $panelPrefix }}/pages" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
-                    <span class="flex items-center gap-2">📄 Pages Management</span>
-                    <span class="text-[10px] text-slate-400">Content</span>
-                </a>
-                <a href="/{{ $panelPrefix }}/media" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
-                    <span class="flex items-center gap-2">🖼️ Media Library</span>
-                    <span class="text-[10px] text-slate-400">Content</span>
-                </a>
-                <a href="/{{ $panelPrefix }}/resources/users" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
-                    <span class="flex items-center gap-2">👥 All Users</span>
-                    <span class="text-[10px] text-slate-400">Users</span>
-                </a>
-                <a href="/{{ $panelPrefix }}/roles" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
-                    <span class="flex items-center gap-2">🛡️ Roles Management</span>
-                    <span class="text-[10px] text-slate-400">Users</span>
-                </a>
-                <a href="/{{ $panelPrefix }}/permissions" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
-                    <span class="flex items-center gap-2">🔑 Permissions Matrix</span>
-                    <span class="text-[10px] text-slate-400">Users</span>
-                </a>
-                <a href="/{{ $panelPrefix }}/security" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
-                    <span class="flex items-center gap-2">🛡️ Sentinel WAF Security</span>
-                    <span class="text-[10px] text-slate-400">System</span>
-                </a>
-                <a href="/{{ $panelPrefix }}/settings" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
-                    <span class="flex items-center gap-2">⚙️ System Settings</span>
-                    <span class="text-[10px] text-slate-400">System</span>
-                </a>
+                @foreach($searchItems as $item)
+                    <a href="{{ $item['url'] }}" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200 transition-colors">
+                        <span class="flex items-center gap-2">
+                            @if($item['icon'] === 'dashboard')
+                                <svg class="w-4 h-4 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                            @elseif($item['icon'] === 'analytics')
+                                <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                            @elseif($item['icon'] === 'posts')
+                                <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            @elseif($item['icon'] === 'pages')
+                                <svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                            @elseif($item['icon'] === 'media')
+                                <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            @elseif($item['icon'] === 'users')
+                                <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                            @elseif($item['icon'] === 'roles')
+                                <svg class="w-4 h-4 text-cyan-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                            @elseif($item['icon'] === 'permissions')
+                                <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
+                            @elseif($item['icon'] === 'security')
+                                <svg class="w-4 h-4 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                            @else
+                                <svg class="w-4 h-4 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                            @endif
+                            {{ $item['title'] }}
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-medium px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800">{{ $item['category'] }}</span>
+                    </a>
+                @endforeach
             </div>
             <div class="px-4 py-2 bg-slate-50 dark:bg-[#181d20] border-t border-slate-200 dark:border-[#2c3338] text-[10px] text-slate-400 flex items-center justify-between">
                 <span>Use <kbd class="font-mono">Cmd+K</kbd> or <kbd class="font-mono">Ctrl+K</kbd> to toggle</span>

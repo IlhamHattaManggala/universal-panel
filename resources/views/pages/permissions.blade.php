@@ -56,7 +56,10 @@
                         @foreach($modules as $moduleName => $permissionList)
                             <tr class="bg-slate-50/80 dark:bg-[#21262a]">
                                 <td colspan="{{ count($roles) + 1 }}" class="py-2 px-4 font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider text-[10px]">
-                                    📦 {{ $moduleName }} Module
+                                    <span class="inline-flex items-center gap-1.5">
+                                        <svg class="w-3.5 h-3.5 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                                        {{ $moduleName }} Module
+                                    </span>
                                 </td>
                             </tr>
                             @foreach($permissionList as $permKey => $permLabel)
