@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class MakeRoleCommand extends Command
 {
-    protected $signature = 'make:role {--permissions= : Optional initial permissions, comma-separated} {names*? : The name(s) of the role(s)}';
+    protected $signature = 'make:role {--permissions= : Optional initial permissions, comma-separated} {names* : The name(s) of the role(s)}';
 
     protected $description = 'Create one or multiple new roles for Universal Panel';
 
