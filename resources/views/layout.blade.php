@@ -360,5 +360,113 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Spotlight / Raycast Cmd+K Quick Search Modal -->
+    <div id="spotlight-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-start justify-center pt-20 px-4 transition-all duration-200">
+        <div class="bg-white dark:bg-[#1d2327] border border-slate-200 dark:border-[#2c3338] rounded-xl shadow-2xl w-full max-w-xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div class="p-3 border-b border-slate-200 dark:border-[#2c3338] flex items-center gap-3">
+                <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input id="spotlight-input" type="text" placeholder="Type a command or search page (e.g. Posts, Users, Security)..." class="w-full bg-transparent text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none" />
+                <kbd class="px-1.5 py-0.5 text-[10px] font-mono text-slate-400 bg-slate-100 dark:bg-[#252c31] border border-slate-300 dark:border-slate-700 rounded">ESC</kbd>
+            </div>
+            <div id="spotlight-results" class="max-h-72 overflow-y-auto p-2 space-y-1 no-scrollbar text-xs">
+                <a href="/{{ $panelPrefix }}" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
+                    <span class="flex items-center gap-2">📊 Dashboard Overview</span>
+                    <span class="text-[10px] text-slate-400">Navigation</span>
+                </a>
+                <a href="/{{ $panelPrefix }}/analytics" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
+                    <span class="flex items-center gap-2">📈 Analytics & Reports</span>
+                    <span class="text-[10px] text-slate-400">Navigation</span>
+                </a>
+                <a href="/{{ $panelPrefix }}/posts" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
+                    <span class="flex items-center gap-2">📝 Posts & Articles</span>
+                    <span class="text-[10px] text-slate-400">Content</span>
+                </a>
+                <a href="/{{ $panelPrefix }}/pages" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
+                    <span class="flex items-center gap-2">📄 Pages Management</span>
+                    <span class="text-[10px] text-slate-400">Content</span>
+                </a>
+                <a href="/{{ $panelPrefix }}/media" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
+                    <span class="flex items-center gap-2">🖼️ Media Library</span>
+                    <span class="text-[10px] text-slate-400">Content</span>
+                </a>
+                <a href="/{{ $panelPrefix }}/resources/users" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
+                    <span class="flex items-center gap-2">👥 All Users</span>
+                    <span class="text-[10px] text-slate-400">Users</span>
+                </a>
+                <a href="/{{ $panelPrefix }}/roles" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
+                    <span class="flex items-center gap-2">🛡️ Roles Management</span>
+                    <span class="text-[10px] text-slate-400">Users</span>
+                </a>
+                <a href="/{{ $panelPrefix }}/permissions" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
+                    <span class="flex items-center gap-2">🔑 Permissions Matrix</span>
+                    <span class="text-[10px] text-slate-400">Users</span>
+                </a>
+                <a href="/{{ $panelPrefix }}/security" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
+                    <span class="flex items-center gap-2">🛡️ Sentinel WAF Security</span>
+                    <span class="text-[10px] text-slate-400">System</span>
+                </a>
+                <a href="/{{ $panelPrefix }}/settings" class="spotlight-item flex items-center justify-between p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-200">
+                    <span class="flex items-center gap-2">⚙️ System Settings</span>
+                    <span class="text-[10px] text-slate-400">System</span>
+                </a>
+            </div>
+            <div class="px-4 py-2 bg-slate-50 dark:bg-[#181d20] border-t border-slate-200 dark:border-[#2c3338] text-[10px] text-slate-400 flex items-center justify-between">
+                <span>Use <kbd class="font-mono">Cmd+K</kbd> or <kbd class="font-mono">Ctrl+K</kbd> to toggle</span>
+                <span>Universal Panel Quick Search</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openSpotlight() {
+            const modal = document.getElementById('spotlight-modal');
+            const input = document.getElementById('spotlight-input');
+            if (modal) {
+                modal.classList.remove('hidden');
+                setTimeout(() => input && input.focus(), 50);
+            }
+        }
+
+        function closeSpotlight() {
+            const modal = document.getElementById('spotlight-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                const modal = document.getElementById('spotlight-modal');
+                if (modal && modal.classList.contains('hidden')) {
+                    openSpotlight();
+                } else {
+                    closeSpotlight();
+                }
+            } else if (e.key === 'Escape') {
+                closeSpotlight();
+            }
+        });
+
+        document.getElementById('spotlight-modal')?.addEventListener('click', function(e) {
+            if (e.target === this) closeSpotlight();
+        });
+
+        document.getElementById('panel-search-input')?.addEventListener('focus', function() {
+            openSpotlight();
+        });
+
+        document.getElementById('spotlight-input')?.addEventListener('input', function(e) {
+            const q = e.target.value.toLowerCase();
+            const items = document.querySelectorAll('.spotlight-item');
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(q)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
