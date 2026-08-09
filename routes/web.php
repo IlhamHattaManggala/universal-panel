@@ -25,6 +25,8 @@ Route::group([
     Route::get('/users', [PageController::class, 'users'])->name('universal-panel.users');
     Route::get('/users/create', [PageController::class, 'createUser'])->name('universal-panel.users.create');
     Route::get('/roles', [PageController::class, 'roles'])->name('universal-panel.roles');
+    Route::get('/permissions', [\Manggala\UniversalPanel\Http\Controllers\PermissionController::class, 'index'])->name('universal-panel.permissions');
+    Route::post('/permissions', [\Manggala\UniversalPanel\Http\Controllers\PermissionController::class, 'update'])->name('universal-panel.permissions.update');
     Route::get('/profile', [PageController::class, 'profile'])->name('universal-panel.profile');
 
     // System & Security

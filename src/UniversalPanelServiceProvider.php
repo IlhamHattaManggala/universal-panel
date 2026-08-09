@@ -27,6 +27,8 @@ use Manggala\UniversalPanel\Commands\MakeTenantCommand;
 use Manggala\UniversalPanel\Commands\MakeThemeCommand;
 use Manggala\UniversalPanel\Commands\MakeUserCommand;
 use Manggala\UniversalPanel\Commands\MakeWidgetCommand;
+use Manggala\UniversalPanel\Commands\MakePermissionPanelCommand;
+use Manggala\UniversalPanel\Commands\MakeRoleCommand;
 use Manggala\UniversalPanel\Commands\OptimizeCommand;
 
 class UniversalPanelServiceProvider extends ServiceProvider
@@ -63,6 +65,8 @@ class UniversalPanelServiceProvider extends ServiceProvider
             MakeSettingCommand::class,
             MakePanelCommand::class,
             MakeUserCommand::class,
+            MakeRoleCommand::class,
+            MakePermissionPanelCommand::class,
             OptimizeCommand::class,
             ClearCacheCommand::class,
         ]);
