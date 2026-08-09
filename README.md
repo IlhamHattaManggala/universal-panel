@@ -6,169 +6,169 @@
 [![PHP Version](https://img.shields.io/badge/PHP-%5E8.2%20%7C%7C%20%5E8.3%20%7C%7C%20%5E8.4-777BB4?style=flat-square&logo=php)](https://php.net)
 [![Laravel Version](https://img.shields.io/badge/Laravel-%5E10.0%20%7C%7C%20%5E11.0%20%7C%7C%20%5E12.0%20%7C%7C%20%5E13.0-FF2D20?style=flat-square&logo=laravel)](https://laravel.com)
 
-**`manggala/universal-panel`** (Package Name: `universal-panel`) adalah **Universal Multi-Stack Admin Panel & Resource Builder Framework** modern untuk aplikasi Laravel.
+**`manggala/universal-panel`** (Package Name: `universal-panel`) is a modern **Universal Multi-Stack Admin Panel & Resource Builder Framework** for Laravel applications.
 
-Package ini menggabungkan keanggunan **WordPress-Inspired Ergonomic Sidebar** (lebar super efisien **160px** / **52px collapsed mode** dengan `.no-scrollbar` hidden scrollbar) dan kekayaan komponen **Rich Interactive Widgets & Data Tables** yang mendukung secara native seluruh variasi stack frontend (**Blade, Livewire v2/v3, Inertia React, Inertia Vue v2/v3, dan REST API**).
+It combines an elegant **WordPress-Inspired Ergonomic Sidebar** (ultra-efficient **160px slim width** / **52px collapsed icon mode** with `.no-scrollbar` hidden scrollbar styling) and rich **Interactive Widgets & Data Tables** natively supporting all frontend stack adapters (**Blade Views, Livewire v2/v3, Inertia React, Inertia Vue v2/v3, and REST API**).
 
 ---
 
-## 🌟 Fitur Utama `manggala/universal-panel`
+## 🌟 Key Features
 
-1. **25 Artisan CLI Commands Suite**: Generator terlengkap di kelasnya untuk membuat Resource, Form, Custom Field, Custom Action, Filter, Column, Policy, Theme, Exporter, Importer, Cluster, Plugin, Tenant, Notification, Wizard Step, Settings Page, dan Background Command.
-2. **Diagnostik Sistem Otomatis (`universal-panel:doctor`)**: Memeriksa otomatis kesehatan lingkungan PHP 8.4+, PDO, Mbstring, dan kompilasi aset Vite.
+1. **25 Artisan CLI Commands Suite**: Comprehensive generator command suite for creating Resources, Forms, Custom Fields, Actions, Filters, Columns, Policies, Themes, Exporters, Importers, Clusters, Plugins, Tenants, Notifications, Wizard Steps, Settings Pages, and Background Commands.
+2. **Automated System Diagnostics (`universal-panel:doctor`)**: One-command diagnostic engine checking PHP 8.4+, PDO, Mbstring, and Vite asset compilation health.
 3. **WordPress-Inspired Ergonomic Sidebar (160px / 52px Collapsed)**:
-   - Lebar 160px yang ringkas & 52px mode terlipat (*collapsed*) tanpa ada ikon yang terpotong.
-   - Pengelompokan menu dengan label tegas (`MAIN`, `CONTENT`, `USER MANAGEMENT`, `SYSTEM`).
-   - Accordion Submenu interaktif dengan panah chevron halus.
-   - `.no-scrollbar` (Bilah scrollbar tersembunyi secara visual tanpa mengurangi fungsi scroll).
-4. **Light ☀️ & Dark 🌙 Mode Sync**: Dukungan 100% mode terang/gelap otomatis dengan penyimpanan status di `localStorage`.
-5. **Rich Interactive Dashboard & Data Tables**: 4 Kartu Stat Widget interaktif, status pills (*Active*, *Pending*, *Blocked*), filter data, search `Cmd+K`, export CSV/Excel, row actions (👁️ View, ✏️ Edit, 🗑️ Delete), dan pagination.
-6. **16 Dedicated Content Pages**: Setiap menu di sidebar (`/admin/analytics`, `/admin/posts`, `/admin/media`, `/admin/users`, `/admin/security`, `/admin/settings`, dll.) memiliki halaman konten khusus yang 100% berfungsi.
-7. **Universal Multi-Stack Support**: Satu deklarasi Resource PHP dapat dirender di **Blade Views, Livewire, Inertia React, Inertia Vue, atau REST API**.
+   - Compact 160px slim width & 52px collapsed icon mode without icon clipping.
+   - Distinct uppercase group section headers (`MAIN`, `CONTENT`, `USER MANAGEMENT`, `SYSTEM`).
+   - Interactive Accordion Submenus with smooth chevron arrow indicators.
+   - Visually hidden scrollbar (`.no-scrollbar`) providing a minimal design while preserving 100% mouse wheel / trackpad scrollability.
+4. **Light ☀️ & Dark 🌙 Mode Sync**: Instant color scheme switching with automatic `localStorage` state persistence.
+5. **Rich Interactive Dashboard & Data Tables**: 4 Stat Cards, status pills (*Active*, *Pending*, *Blocked*), filters, `Cmd+K` Spotlight search, CSV/Excel exports, row action buttons (👁️ View, ✏️ Edit, 🗑️ Delete), and pagination.
+6. **16 Dedicated Sub-Pages**: Dedicated functional views for `/admin/analytics`, `/admin/posts`, `/admin/media`, `/admin/users`, `/admin/security`, `/admin/settings`, `/admin/profile`, etc.
+7. **Universal Multi-Stack Support**: Single PHP Resource declaration rendered seamlessly across **Blade, Livewire, Inertia React, Inertia Vue, or REST API JSON**.
 
 ---
 
-## 📋 Matriks Kompatibilitas Framework & Stack
+## 📋 Framework & Compatibility Matrix
 
-| Parameter | Dukungan Versi & Framework |
+| Parameter | Specifications |
 |---|---|
 | **Package Name** | `manggala/universal-panel` (Folder: `universal-panel`) |
 | **PHP Version** | `^8.2 || ^8.3 || ^8.4` |
 | **Laravel Framework (4 Major Versions)** | `^10.0 || ^11.0 || ^12.0 || ^13.0` |
 | **Frontend Stack Support** | Blade Views, Livewire (v2/v3), Inertia React, Inertia Vue, REST API |
 | **Sidebar Layout Dimensions** | 160px (Expanded Slim) / 52px (Collapsed Icon Mode) |
-| **Scrollbar Style** | `.no-scrollbar` (Visually Hidden Scrollbar) |
+| **Scrollbar Styling** | `.no-scrollbar` (Visually Hidden Scrollbar) |
 | **Artisan Commands Suite** | 25 Dedicated Generator & Management Commands |
 | **Testing Engine** | Pest PHP (`pestphp/pest`) |
 
 ---
 
-## 📦 Instalasi & Setup
+## 📦 Installation & Setup
 
-### 1. Pasang via Composer:
+### 1. Install via Composer:
 ```bash
 composer require manggala/universal-panel
 ```
 
-### 2. Jalankan Perintah Instalasi:
+### 2. Run Installation Command:
 ```bash
 php artisan universal-panel:install
 ```
 
-### 3. Periksa Kesehatan Lingkungan (System Diagnostics):
+### 3. Run Environment Diagnostics Check:
 ```bash
 php artisan universal-panel:doctor
 ```
 
 ---
 
-## 🛠️ Suite Lengkap 25 Perintah Artisan CLI (`php artisan`)
+## 🛠️ Complete 25 Artisan CLI Commands Suite (`php artisan`)
 
-### 🩺 1. Perintah Setup, Maintenance & Diagnostik:
+### 🩺 1. Setup, Maintenance & Diagnostics:
 ```bash
-# Mempublikasikan konfigurasi & views Blade otomatis
+# Publish configurations and Blade views automatically
 php artisan universal-panel:install
 
-# Diagnostik kesehatan lingkungan PHP, PDO, & Vite assets
+# Run environment health check (PHP, PDO, Mbstring, Vite build)
 php artisan universal-panel:doctor
 
-# Membuat pengguna Super Admin baru di database
+# Create a new Super Admin user interactively
 php artisan make:panel-user
 
-# Mengoptimalkan & menyimpan cache metadata resource untuk produksi
+# Optimize and cache panel metadata for production
 php artisan universal-panel:optimize
 
-# Membersihkan cache metadata panel & ikon
+# Clear cached panel routes and metadata
 php artisan universal-panel:clear-cache
 ```
 
-### 📦 2. Perintah Generator Component (Resource, Form, Field, Page, Settings):
+### 📦 2. Component Generator Commands:
 ```bash
-# Membuat Resource CRUD baru (contoh: ProductResource)
+# Create a new Resource CRUD class (e.g. ProductResource)
 php artisan make:panel-resource Product
 
-# Membuat Class Form Schema terpisah (contoh: UserProfileForm)
+# Create a standalone Form Schema class (e.g. UserProfileForm)
 php artisan make:panel-form UserProfile
 
-# Membuat Custom Input Field Component (contoh: ColorPickerField)
+# Create a Custom Input Field Component (e.g. ColorPickerField)
 php artisan make:panel-field ColorPicker
 
-# Membuat Halaman Admin Kustom (contoh: AnalyticsPage)
+# Create a Custom Admin Page class (e.g. AnalyticsPage)
 php artisan make:panel-page Analytics
 
-# Membuat Halaman Pengaturan Khusus (contoh: PaymentGatewaySetting)
+# Create a Dedicated Settings Page class (e.g. PaymentGatewaySetting)
 php artisan make:panel-setting PaymentGateway
 ```
 
-### ⚡ 3. Perintah Generator Fitur Interaktif (Action, Filter, Column, Step, Notification):
+### ⚡ 3. Interactive Feature Generators:
 ```bash
-# Membuat Custom Table/Header Action (contoh: ExportPdfAction)
+# Create a Custom Table/Header Action (e.g. ExportPdfAction)
 php artisan make:panel-action ExportPdf
 
-# Membuat Custom Table Filter (contoh: DateRangeFilter)
+# Create a Custom Table Filter (e.g. DateRangeFilter)
 php artisan make:panel-filter DateRange
 
-# Membuat Custom Table Column Component (contoh: ProgressBarColumn)
+# Create a Custom Table Column Component (e.g. ProgressBarColumn)
 php artisan make:panel-column ProgressBar
 
-# Membuat Class Notification Lonceng Topbar (contoh: SystemAlertNotification)
+# Create a Topbar Notification class (e.g. SystemAlertNotification)
 php artisan make:panel-notification SystemAlert
 
-# Membuat Multi-Step Form Wizard Step (contoh: AccountSetupStep)
+# Create a Multi-Step Form Wizard Step (e.g. AccountSetupStep)
 php artisan make:panel-step AccountSetup
 
-# Membuat Relation Manager Table (contoh: PostCommentsRelationManager)
+# Create a Relation Manager Table class (e.g. PostCommentsRelationManager)
 php artisan make:panel-relation-manager PostComments
 ```
 
-### 📊 4. Perintah Generator Data & Import/Export:
+### 📊 4. Data & Task Generators:
 ```bash
-# Membuat Class Bulk Data Exporter Excel/CSV (contoh: TransactionExporter)
+# Create a Bulk Data Exporter class (e.g. TransactionExporter)
 php artisan make:panel-exporter Transaction
 
-# Membuat Class Bulk Data Importer (contoh: ProductImporter)
+# Create a Bulk Data Importer class (e.g. ProductImporter)
 php artisan make:panel-importer Product
 
-# Membuat Class Background Command Panel (contoh: CleanTempFilesCommand)
+# Create a Panel Background Command (e.g. CleanTempFilesCommand)
 php artisan make:panel-command CleanTempFiles
 ```
 
-### 🛡️ 5. Perintah Generator Arsitektur & Ekstensi:
+### 🛡️ 5. Architecture & Extension Generators:
 ```bash
-# Membuat Class Authorization Policy (contoh: PostPolicy)
+# Create an Authorization Policy class (e.g. PostPolicy)
 php artisan make:panel-policy Post
 
-# Membuat File CSS Tema Kustom (contoh: CorporateBrandTheme)
+# Create a Custom Theme CSS file (e.g. CorporateBrandTheme)
 php artisan make:panel-theme CorporateBrand
 
-# Membuat Grouping Cluster Resource (contoh: ECommerceCluster)
+# Create a Resource Cluster grouping (e.g. ECommerceCluster)
 php artisan make:panel-cluster ECommerce
 
-# Membuat Class Add-on Plugin (contoh: AuditLogsPlugin)
+# Create an Add-on Plugin class (e.g. AuditLogsPlugin)
 php artisan make:panel-plugin AuditLogs
 
-# Membuat Konfigurasi Multi-Tenancy (contoh: TeamTenant)
+# Create a Multi-Tenancy Configuration (e.g. TeamTenant)
 php artisan make:panel-tenant Team
 
-# Membuat Widget Dashboard Stat/Chart (contoh: SalesOverviewWidget --chart)
+# Create a Dashboard Widget (e.g. SalesOverviewWidget --chart)
 php artisan make:panel-widget SalesOverview --chart
 ```
 
 ---
 
-## 📐 Tata Letak Ergonomis Sidebar & Navigation
+## 📐 Ergonomic Sidebar & Navigation Architecture
 
-- **Lebar Presisi (160px / 52px Collapsed)**: Menyelamatkan 85-90% area kerja layar utama.
-- **Section Group Labels**: Pengelompokan menu dengan teks kategori (`MAIN`, `CONTENT`, `USER MANAGEMENT`, `SYSTEM`).
-- **Accordion Submenus**: Fitur expand/collapse untuk menu bertingkat (*Posts, Pages, Users, Sentinel WAF, Settings*).
-- **Visually Hidden Scrollbar (`.no-scrollbar`)**: Bilah scrollbar tersembunyi secara visual tanpa ada tombol/garis scrollbar yang menggangu, namun dapat di-scroll dengan mulus menggunakan mouse wheel/trackpad.
-- **Tinggi Tetap (`calc(100vh - 2.75rem)`)**: Membuka banyak submenu sekaligus **tidak akan pernah** mengubah tinggi sidebar.
+- **Slim Dimensions (160px / 52px Collapsed)**: Conserves 85-90% of screen width for main workspace content.
+- **Section Group Labels**: Clear uppercase category headers (`MAIN`, `CONTENT`, `USER MANAGEMENT`, `SYSTEM`).
+- **Accordion Submenus**: Smooth expand/collapse toggling for multi-level navigation items (*Posts, Pages, Users, Sentinel WAF, Settings*).
+- **Visually Hidden Scrollbar (`.no-scrollbar`)**: Hides scrollbar thumbs visually for a clean aesthetic while preserving smooth trackpad/wheel scrolling.
+- **Fixed Height Constraint (`calc(100vh - 2.75rem)`)**: Expanding submenus never alters sidebar or layout height.
 
 ---
 
-## 🚀 Deklarasi Resource CRUD
+## 🚀 Resource CRUD Declaration Example
 
-Buat kelas Resource baru di `app/UniversalPanel/Resources/UserResource.php`:
+Create a Resource class in `app/UniversalPanel/Resources/UserResource.php`:
 
 ```php
 namespace App\UniversalPanel\Resources;
@@ -196,7 +196,7 @@ class UserResource extends Resource
 
 ---
 
-## 🖥️ Konfigurasi Package (`config/universal-panel.php`)
+## ⚙️ Configuration (`config/universal-panel.php`)
 
 ```php
 return [
@@ -204,7 +204,7 @@ return [
     |--------------------------------------------------------------------------
     | Default Frontend Stack Adapter
     |--------------------------------------------------------------------------
-    | Pilihan: 'blade', 'livewire', 'react', 'vue', 'api'
+    | Options: 'blade', 'livewire', 'react', 'vue', 'api'
     */
     'stack' => env('PANEL_STACK', 'react'),
 
@@ -230,9 +230,9 @@ return [
 
 ---
 
-## 🧪 Pengujian (Testing)
+## 🧪 Testing
 
-Jalankan pengujian otomatis menggunakan Pest PHP:
+Run automated tests using Pest PHP:
 
 ```bash
 vendor/bin/pest
@@ -240,6 +240,6 @@ vendor/bin/pest
 
 ---
 
-## 📄 Lisensi
+## 📄 License
 
-Package `manggala/universal-panel` dirilis di bawah [Lisensi MIT](LICENSE). Copyright (c) 2026 Ilham Hatta Manggala.
+The `manggala/universal-panel` package is open-sourced software licensed under the [MIT license](LICENSE). Copyright (c) 2026 Ilham Hatta Manggala.
