@@ -16,6 +16,17 @@ foreach ($panelPaths as $pathPrefix) {
         'prefix' => $pathPrefix,
         'middleware' => config('universal-panel.middleware', ['web']),
     ], function () use ($pathPrefix) {
+        // Authentication Routes
+        Route::get('/login', [\Manggala\UniversalPanel\Http\Controllers\AuthController::class, 'showLoginForm'])->name("universal-panel.{$pathPrefix}.login");
+        Route::post('/login', [\Manggala\UniversalPanel\Http\Controllers\AuthController::class, 'login']);
+        Route::get('/register', [\Manggala\UniversalPanel\Http\Controllers\AuthController::class, 'showRegisterForm'])->name("universal-panel.{$pathPrefix}.register");
+        Route::post('/register', [\Manggala\UniversalPanel\Http\Controllers\AuthController::class, 'register']);
+        Route::get('/forgot-password', [\Manggala\UniversalPanel\Http\Controllers\AuthController::class, 'showForgotPasswordForm'])->name("universal-panel.{$pathPrefix}.forgot-password");
+        Route::post('/forgot-password', [\Manggala\UniversalPanel\Http\Controllers\AuthController::class, 'sendResetLink']);
+        Route::get('/reset-password/{token}', [\Manggala\UniversalPanel\Http\Controllers\AuthController::class, 'showResetPasswordForm'])->name("universal-panel.{$pathPrefix}.reset-password");
+        Route::post('/reset-password', [\Manggala\UniversalPanel\Http\Controllers\AuthController::class, 'resetPassword']);
+        Route::post('/logout', [\Manggala\UniversalPanel\Http\Controllers\AuthController::class, 'logout'])->name("universal-panel.{$pathPrefix}.logout");
+
         Route::get('/', [PanelDashboardController::class, 'index'])->name("universal-panel.{$pathPrefix}.dashboard");
         Route::get('/analytics', [PageController::class, 'analytics'])->name("universal-panel.{$pathPrefix}.analytics");
         
