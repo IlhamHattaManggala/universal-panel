@@ -10,7 +10,30 @@ class Panel
     protected array $resources = [];
     protected string $id = 'admin';
     protected string $path = 'admin';
-    protected string $stack = 'react';
+    protected string $title = 'Universal Panel';
+    protected ?string $role = null;
+    protected string $stack = 'blade';
+    protected array $colors = [
+        'primary' => '#2271b1',
+    ];
+
+    public static function make(string $id = 'admin'): static
+    {
+        $panel = new static();
+        $panel->id($id);
+        $panel->path($id);
+        
+        if ($id === 'superadmin') {
+            $panel->title('Superadmin Panel');
+            $panel->role('Superadmin');
+        }
+
+        /** @var PanelManager $manager */
+        $manager = app('universal-panel');
+        $manager->registerPanel($panel);
+
+        return $panel;
+    }
 
     public function id(string $id): static
     {
@@ -20,7 +43,25 @@ class Panel
 
     public function path(string $path): static
     {
-        $this->path = $path;
+        $this->path = trim($path, '/');
+        return $this;
+    }
+
+    public function title(string $title): static
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    public function role(?string $role): static
+    {
+        $this->role = $role;
+        return $this;
+    }
+
+    public function colors(array $colors): static
+    {
+        $this->colors = array_merge($this->colors, $colors);
         return $this;
     }
 
@@ -50,6 +91,21 @@ class Panel
     public function getPath(): string
     {
         return $this->path;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function getColors(): array
+    {
+        return $this->colors;
     }
 
     public function getStack(): string

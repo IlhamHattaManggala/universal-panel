@@ -117,12 +117,19 @@
         }
     </style>
 </head>
+@php 
+    $panelPrefix = request()->is('superadmin*') ? 'superadmin' : 'admin'; 
+    $panelTitle = $panelPrefix === 'superadmin' ? 'Superadmin Panel' : 'Universal Panel';
+@endphp
 <body class="h-full bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased flex flex-col transition-colors duration-200 overflow-hidden">
     <header class="h-11 bg-white dark:bg-[#1d2327] border-b border-slate-200 dark:border-[#2c3338] text-slate-800 dark:text-slate-200 px-4 flex items-center justify-between text-xs select-none relative z-30 transition-colors shrink-0">
         <!-- Left side: Panel Name & Hamburger Menu -->
         <div class="flex items-center gap-4 shrink-0 min-w-max">
-            <a href="/admin" class="font-bold text-slate-800 dark:text-slate-100 text-sm tracking-tight hover:text-sky-500 whitespace-nowrap">
-                Universal Panel
+            <a href="/{{ $panelPrefix }}" class="font-bold text-slate-800 dark:text-slate-100 text-sm tracking-tight hover:text-sky-500 whitespace-nowrap flex items-center gap-2">
+                @if($panelPrefix === 'superadmin')
+                    <span class="px-1.5 py-0.5 rounded text-[10px] bg-sky-500 text-white font-extrabold tracking-wider uppercase">Super</span>
+                @endif
+                {{ $panelTitle }}
             </a>
             <button onclick="toggleSidebar()" class="p-1 rounded text-slate-400 hover:text-slate-700 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-[#2c3338] transition-colors focus:outline-none" title="Toggle Sidebar">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -217,12 +224,12 @@
                     <div class="px-3 pt-2 pb-1 sidebar-section-label">
                         <span class="text-[9px] font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 block truncate">MAIN</span>
                     </div>
-                    <a href="/admin" title="Dashboard" class="flex items-center gap-2 px-3 py-1.5 {{ request()->is('admin') ? 'bg-[#2271b1] text-white font-semibold relative after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:border-y-8 after:border-y-transparent after:border-r-8 after:border-r-slate-50 dark:after:border-r-slate-950' : 'hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-300' }}">
-                        <svg class="w-4 h-4 {{ request()->is('admin') ? 'text-white' : 'text-slate-400 group-hover:text-sky-500' }} shrink-0 mx-auto sm:mx-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                    <a href="/{{ $panelPrefix }}" title="Dashboard" class="flex items-center gap-2 px-3 py-1.5 {{ request()->is($panelPrefix) ? 'bg-[#2271b1] text-white font-semibold relative after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:border-y-8 after:border-y-transparent after:border-r-8 after:border-r-slate-50 dark:after:border-r-slate-950' : 'hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-300' }}">
+                        <svg class="w-4 h-4 {{ request()->is($panelPrefix) ? 'text-white' : 'text-slate-400 group-hover:text-sky-500' }} shrink-0 mx-auto sm:mx-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
                         <span class="sidebar-item-text truncate">Dashboard</span>
                     </a>
-                    <a href="/admin/analytics" title="Analytics" class="flex items-center gap-2 px-3 py-1.5 {{ request()->is('admin/analytics') ? 'bg-[#2271b1] text-white font-semibold relative after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:border-y-8 after:border-y-transparent after:border-r-8 after:border-r-slate-50 dark:after:border-r-slate-950' : 'hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-300' }}">
-                        <svg class="w-4 h-4 {{ request()->is('admin/analytics') ? 'text-white' : 'text-slate-400 group-hover:text-sky-500' }} shrink-0 mx-auto sm:mx-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    <a href="/{{ $panelPrefix }}/analytics" title="Analytics" class="flex items-center gap-2 px-3 py-1.5 {{ request()->is($panelPrefix . '/analytics') ? 'bg-[#2271b1] text-white font-semibold relative after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2 after:border-y-8 after:border-y-transparent after:border-r-8 after:border-r-slate-50 dark:after:border-r-slate-950' : 'hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-300' }}">
+                        <svg class="w-4 h-4 {{ request()->is($panelPrefix . '/analytics') ? 'text-white' : 'text-slate-400 group-hover:text-sky-500' }} shrink-0 mx-auto sm:mx-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
                         <span class="sidebar-item-text truncate">Analytics</span>
                     </a>
                 </div>
@@ -243,10 +250,10 @@
                             <svg id="chevron-posts" class="sidebar-chevron w-3 h-3 text-slate-400 shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </div>
                         <div id="submenu-posts" class="sidebar-submenu bg-slate-50 dark:bg-[#101517] py-1">
-                            <a href="/admin/posts" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">All Posts</a>
-                            <a href="/admin/posts/create" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">Add New</a>
-                            <a href="/admin/posts/categories" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">Categories</a>
-                            <a href="/admin/posts/tags" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">Tags</a>
+                            <a href="/{{ $panelPrefix }}/posts" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">All Posts</a>
+                            <a href="/{{ $panelPrefix }}/posts/create" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">Add New</a>
+                            <a href="/{{ $panelPrefix }}/posts/categories" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">Categories</a>
+                            <a href="/{{ $panelPrefix }}/posts/tags" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">Tags</a>
                         </div>
                     </div>
 
@@ -260,12 +267,12 @@
                             <svg id="chevron-pages" class="sidebar-chevron w-3 h-3 text-slate-400 shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </div>
                         <div id="submenu-pages" class="sidebar-submenu hidden bg-slate-50 dark:bg-[#101517] py-1">
-                            <a href="/admin/pages" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">All Pages</a>
-                            <a href="/admin/pages/create" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">Add New Page</a>
+                            <a href="/{{ $panelPrefix }}/pages" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">All Pages</a>
+                            <a href="/{{ $panelPrefix }}/pages/create" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">Add New Page</a>
                         </div>
                     </div>
 
-                    <a href="/admin/media" title="Media" class="flex items-center gap-2 px-3 py-1.5 hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-300">
+                    <a href="/{{ $panelPrefix }}/media" title="Media" class="flex items-center gap-2 px-3 py-1.5 hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-300">
                         <svg class="w-4 h-4 text-slate-400 group-hover:text-sky-500 shrink-0 mx-auto sm:mx-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         <span class="sidebar-item-text truncate">Media</span>
                     </a>
@@ -287,18 +294,18 @@
                             <svg id="chevron-users" class="sidebar-chevron w-3 h-3 text-slate-400 shrink-0 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                         </div>
                         <div id="submenu-users" class="sidebar-submenu hidden bg-slate-50 dark:bg-[#101517] py-1">
-                            <a href="/admin/resources/users" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">All Users</a>
-                            <a href="/admin/users/create" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">Add New User</a>
-                            <a href="/admin/profile" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">My Profile</a>
+                            <a href="/{{ $panelPrefix }}/resources/users" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">All Users</a>
+                            <a href="/{{ $panelPrefix }}/users/create" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">Add New User</a>
+                            <a href="/{{ $panelPrefix }}/profile" class="block pl-9 pr-3 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-sky-500">My Profile</a>
                         </div>
                     </div>
 
-                    <a href="/admin/roles" title="Roles & Perms" class="flex items-center gap-2 px-3 py-1.5 hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-300 {{ request()->is('admin/roles') ? 'bg-[#2271b1] text-white font-semibold' : '' }}">
+                    <a href="/{{ $panelPrefix }}/roles" title="Roles & Perms" class="flex items-center gap-2 px-3 py-1.5 hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-300 {{ request()->is($panelPrefix . '/roles') ? 'bg-[#2271b1] text-white font-semibold' : '' }}">
                         <svg class="w-4 h-4 text-slate-400 group-hover:text-sky-500 shrink-0 mx-auto sm:mx-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                         <span class="sidebar-item-text truncate">Roles</span>
                     </a>
 
-                    <a href="/admin/permissions" title="Permissions Matrix" class="flex items-center gap-2 px-3 py-1.5 hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-300 {{ request()->is('admin/permissions') ? 'bg-[#2271b1] text-white font-semibold' : '' }}">
+                    <a href="/{{ $panelPrefix }}/permissions" title="Permissions Matrix" class="flex items-center gap-2 px-3 py-1.5 hover:bg-slate-100 dark:hover:bg-[#2c3338] text-slate-700 dark:text-slate-300 {{ request()->is($panelPrefix . '/permissions') ? 'bg-[#2271b1] text-white font-semibold' : '' }}">
                         <svg class="w-4 h-4 text-slate-400 group-hover:text-sky-500 shrink-0 mx-auto sm:mx-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
                         <span class="sidebar-item-text truncate">Permissions</span>
                     </a>

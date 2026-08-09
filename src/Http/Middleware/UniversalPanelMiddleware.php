@@ -14,6 +14,14 @@ class UniversalPanelMiddleware
             abort(404, 'Universal Panel is disabled.');
         }
 
+        $user = $request->user();
+        $currentPath = trim($request->getPathInfo(), '/');
+
+        // Dynamic Role-based auto redirect for Superadmin
+        if ($user && isset($user->role) && strtolower($user->role) === 'superadmin' && $currentPath === 'admin') {
+            return redirect('/superadmin');
+        }
+
         return $next($request);
     }
 }
