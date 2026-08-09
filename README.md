@@ -12,11 +12,11 @@ It combines an elegant **WordPress-Inspired Ergonomic Sidebar** (ultra-efficient
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 1. **27 Artisan CLI Commands Suite**: Comprehensive generator command suite for creating Resources (`--generate` for auto Model & Migration), Roles (`make:role`), Permission Panel (`make:permission-panel`), Forms, Custom Fields, Actions, Filters, Columns, Policies, Themes, Exporters, Importers, Clusters, Plugins, Tenants, Notifications, Wizard Steps, Settings Pages, and Background Commands.
 2. **Multi-Panel Builder & Dynamic Role Routing**: Register multiple panel instances fluently (`Panel::make('superadmin')->path('superadmin')->role('Superadmin')`) with automatic role-based redirect to `/superadmin` vs `/admin`.
-3. **Full Authentication Suite**: Plug-and-play authentication views for **Sign In** (`/admin/login`), **Register Admin** (`/admin/register`), **Forgot Password** (`/admin/forgot-password`), **Reset Password** (`/admin/reset-password`), and **Sign Out** (`/admin/logout`).
+3. **Full Authentication Suite**: Plug-and-play authentication views for Sign In (`/admin/login`), Register Admin (`/admin/register`), Forgot Password (`/admin/forgot-password`), Reset Password (`/admin/reset-password`), and Sign Out (`/admin/logout`).
 4. **Permission Management Matrix GUI (`/admin/permissions`)**: Visual role-based access control matrix with checkboxes for module permissions (*Posts, Pages, Media, Users, Security, Settings*).
 5. **100% Dynamic Spotlight Quick Search (`Cmd+K` / `Ctrl+K`)**: Instant search modal automatically discovering registered CRUD resources and system pages with clean SVG icons (Zero Third-Party Dependency).
 6. **WordPress-Inspired Ergonomic Sidebar (160px / 52px Collapsed)**:
@@ -29,7 +29,7 @@ It combines an elegant **WordPress-Inspired Ergonomic Sidebar** (ultra-efficient
 
 ---
 
-## 📋 Framework & Compatibility Matrix
+## Framework & Compatibility Matrix
 
 | Parameter | Specifications |
 |---|---|
@@ -46,7 +46,7 @@ It combines an elegant **WordPress-Inspired Ergonomic Sidebar** (ultra-efficient
 
 ---
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 ### 1. Install via Composer:
 ```bash
@@ -65,9 +65,9 @@ php artisan universal-panel:doctor
 
 ---
 
-## 🛠️ Complete 27 Artisan CLI Commands Suite (`php artisan`)
+## Complete 27 Artisan CLI Commands Suite (`php artisan`)
 
-### 🩺 1. Setup, Maintenance & Diagnostics:
+### 1. Setup, Maintenance & Diagnostics:
 ```bash
 # Publish configurations and Blade views automatically
 php artisan universal-panel:install
@@ -85,7 +85,7 @@ php artisan universal-panel:optimize
 php artisan universal-panel:clear-cache
 ```
 
-### 📦 2. Component Generator Commands:
+### 2. Component Generator Commands:
 ```bash
 # Create a new Resource CRUD class (e.g. ProductResource)
 php artisan make:panel-resource Product
@@ -112,7 +112,7 @@ php artisan make:panel-page Analytics
 php artisan make:panel-setting PaymentGateway
 ```
 
-### ⚡ 3. Interactive Feature Generators:
+### 3. Interactive Feature Generators:
 ```bash
 # Create a Custom Table/Header Action (e.g. ExportPdfAction)
 php artisan make:panel-action ExportPdf
@@ -133,7 +133,7 @@ php artisan make:panel-step AccountSetup
 php artisan make:panel-relation-manager PostComments
 ```
 
-### 📊 4. Data & Task Generators:
+### 4. Data & Task Generators:
 ```bash
 # Create a Bulk Data Exporter class (e.g. TransactionExporter)
 php artisan make:panel-exporter Transaction
@@ -145,7 +145,7 @@ php artisan make:panel-importer Product
 php artisan make:panel-command CleanTempFiles
 ```
 
-### 🛡️ 5. Architecture & Extension Generators:
+### 5. Architecture & Extension Generators:
 ```bash
 # Create an Authorization Policy class (e.g. PostPolicy)
 php artisan make:panel-policy Post
@@ -168,7 +168,7 @@ php artisan make:panel-widget SalesOverview --chart
 
 ---
 
-## 🏢 Multi-Panel Registration Example
+## Multi-Panel Registration Example
 
 Register multiple panel instances in `app/Providers/AppServiceProvider.php`:
 
@@ -189,7 +189,7 @@ Panel::make('admin')
 
 ---
 
-## 🚀 Resource CRUD Declaration Example
+## Resource CRUD Declaration Example
 
 Create a Resource class in `app/UniversalPanel/Resources/UserResource.php`:
 
@@ -219,7 +219,7 @@ class UserResource extends Resource
 
 ---
 
-## ⚙️ Configuration (`config/universal-panel.php`)
+## Configuration (`config/universal-panel.php`)
 
 ```php
 return [
@@ -253,7 +253,7 @@ return [
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Run automated tests using Pest PHP:
 
@@ -263,6 +263,6 @@ vendor/bin/pest
 
 ---
 
-## 📄 License
+## License
 
 The `manggala/universal-panel` package is open-sourced software licensed under the [MIT license](LICENSE). Copyright (c) 2026 Ilham Hatta Manggala.
