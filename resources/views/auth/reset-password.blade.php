@@ -8,10 +8,7 @@
 </head>
 <body class="h-full flex items-center justify-center p-4 bg-slate-950 text-slate-100 antialiased">
     <div class="w-full max-w-md space-y-6">
-        <div class="text-center space-y-2">
-            <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#2271b1] text-white shadow-lg shadow-sky-500/20 mb-2">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-            </div>
+        <div class="text-center space-y-1">
             <h1 class="text-2xl font-bold tracking-tight text-white">Set New Password</h1>
             <p class="text-xs text-slate-400">Please choose a strong password to protect your account</p>
         </div>
