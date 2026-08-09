@@ -136,12 +136,13 @@
             </button>
         </div>
 
-        <!-- Center: Search Input centered -->
+        <!-- Center: Search Trigger centered (Raycast / GitHub style) -->
         <div class="flex-1 flex justify-center max-w-md mx-4">
-            <div class="relative flex items-center w-full max-w-sm">
+            <button onclick="openSpotlight()" type="button" class="relative flex items-center justify-between w-full max-w-sm bg-slate-100 dark:bg-[#101517] text-slate-400 text-xs pl-8 pr-2 py-1.5 rounded border border-slate-300 dark:border-[#2c3338] hover:border-sky-500/50 hover:bg-slate-200/50 dark:hover:bg-[#161c1f] transition-all cursor-pointer select-none">
                 <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <input id="panel-search-input" type="text" placeholder="Search resources (Cmd+K)..." class="bg-slate-100 dark:bg-[#101517] text-slate-800 dark:text-slate-200 text-xs pl-8 pr-3 py-1 rounded border border-slate-300 dark:border-[#2c3338] focus:outline-none focus:border-sky-500 w-full transition-all" />
-            </div>
+                <span class="truncate">Search resources...</span>
+                <kbd class="text-[10px] font-mono bg-white dark:bg-[#1d2327] border border-slate-300 dark:border-slate-700 px-1.5 py-0.5 rounded text-slate-500 dark:text-slate-400 shrink-0">Ctrl+K</kbd>
+            </button>
         </div>
 
         <!-- Right side: Notification -> Light/Dark -> Profile -->
@@ -449,10 +450,6 @@
 
         document.getElementById('spotlight-modal')?.addEventListener('click', function(e) {
             if (e.target === this) closeSpotlight();
-        });
-
-        document.getElementById('panel-search-input')?.addEventListener('focus', function() {
-            openSpotlight();
         });
 
         document.getElementById('spotlight-input')?.addEventListener('input', function(e) {
