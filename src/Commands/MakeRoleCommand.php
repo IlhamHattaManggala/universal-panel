@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class MakeRoleCommand extends Command
 {
-    protected $signature = 'make:role {names? : The name(s) of the role(s), comma-separated} {--permissions= : Optional initial permissions, comma-separated}';
+    protected $signature = 'make:role {--permissions= : Optional initial permissions, comma-separated} {names*? : The name(s) of the role(s)}';
 
     protected $description = 'Create one or multiple new roles for Universal Panel';
 
@@ -15,7 +15,10 @@ class MakeRoleCommand extends Command
         $namesInput = $this->argument('names');
 
         if (empty($namesInput)) {
-            $namesInput = $this->ask('Enter role name(s) (comma-separated for multiple)');
+            $input = $this->ask('Enter role name(s) (comma or space separated for multiple)');
+            if (! empty($input)) {
+                $namesInput = [$input];
+            }
         }
 
         if (empty($namesInput)) {
@@ -23,7 +26,11 @@ class MakeRoleCommand extends Command
             return self::FAILURE;
         }
 
-        $roles = array_filter(array_map('trim', explode(',', $namesInput)));
+        // Merge array of names and handle both comma and space separation
+        $rawString = is_array($namesInput) ? implode(' ', $namesInput) : (string) $namesInput;
+        $roles = array_filter(array_map('trim', explode(',', str_replace(' ', ',', $rawString))));
+        // Remove duplicates and empty items
+        $roles = array_unique(array_filter($roles));
 
         if (empty($roles)) {
             $this->error('No valid role names provided!');
