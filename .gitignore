@@ -1,9 +1,40 @@
+# Dependencies
 /vendor
+/node_modules
+/dist
+/public/hot
+
+# Environment & Secrets
+.env
+.env.*
+storage/*.key
+
+# Testing & Static Analysis Caches
 /.phpunit.cache
 /.pest
-/storage/*.key
-.env
-composer.lock
-node_modules
-dist
+/.phpstan.cache
+/coverage
+/clover.xml
+
+# IDE & Editor Configuration
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS & System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Logs & Temporary Files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tmp
+*.swp
+*.swo
+
+# Internal Documentation & Notes
 docs/

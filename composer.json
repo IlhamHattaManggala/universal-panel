@@ -1,0 +1,75 @@
+{
+    "name": "manggala/universal-panel",
+    "description": "Universal Multi-Stack Admin Panel & Resource Builder Framework for Laravel with 160px WordPress-Inspired Compact Sidebar.",
+    "keywords": [
+        "manggala",
+        "laravel",
+        "universal-panel",
+        "admin-panel",
+        "resource-builder",
+        "wordpress-sidebar",
+        "inertia-react",
+        "inertia-vue",
+        "livewire",
+        "blade"
+    ],
+    "homepage": "https://github.com/IlhamHattaManggala/universal-panel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ilham Hatta Manggala",
+            "email": "ilhamhattamanggala123@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.2 || ^8.3 || ^8.4",
+        "illuminate/contracts": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "illuminate/support": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "illuminate/database": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "illuminate/http": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "illuminate/console": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "illuminate/routing": "^10.0 || ^11.0 || ^12.0 || ^13.0",
+        "illuminate/view": "^10.0 || ^11.0 || ^12.0 || ^13.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0 || ^9.0 || ^10.0",
+        "pestphp/pest": "^2.0 || ^3.0",
+        "pestphp/pest-plugin-laravel": "^2.0 || ^3.0",
+        "laravel/pint": "^1.18",
+        "larastan/larastan": "^2.0 || ^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Manggala\\UniversalPanel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Manggala\\UniversalPanel\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "format": "vendor/bin/pint",
+        "analyse": "vendor/bin/phpstan analyse src --memory-limit=512M"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Manggala\\UniversalPanel\\UniversalPanelServiceProvider"
+            ],
+            "aliases": {
+                "Panel": "Manggala\\UniversalPanel\\Facades\\Panel"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

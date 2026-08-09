@@ -1,0 +1,9 @@
+providers:
+  - Manggala\UniversalPanel\UniversalPanelServiceProvider
+
+aliases:
+  Panel: Manggala\UniversalPanel\Facades\Panel
+
+env:
+  - PANEL_STACK=react
+  - UNIVERSAL_PANEL_ENABLED=true

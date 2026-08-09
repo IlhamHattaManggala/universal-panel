@@ -10,16 +10,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v1.0.0] - 2026-08-09
 
 ### Added
+- 🛠️ **25 Artisan CLI Generator & Management Commands**:
+  - Setup & Maintenance: `universal-panel:install`, `universal-panel:doctor`, `make:panel-user`, `universal-panel:optimize`, `universal-panel:clear-cache`.
+  - Component Generators: `make:panel-resource`, `make:panel-form`, `make:panel-field`, `make:panel-page`, `make:panel-setting`.
+  - Interactive Features: `make:panel-action`, `make:panel-filter`, `make:panel-column`, `make:panel-notification`, `make:panel-step`, `make:panel-relation-manager`.
+  - Data & Tasks: `make:panel-exporter`, `make:panel-importer`, `make:panel-command`.
+  - Architecture & Extension: `make:panel-policy`, `make:panel-theme`, `make:panel-cluster`, `make:panel-plugin`, `make:panel-tenant`, `make:panel-widget`.
+- 🩺 **System Diagnostics Command (`universal-panel:doctor`)**: Automated diagnostic checks for PHP 8.4+, PDO, Mbstring, and Vite asset compilation.
+- 📐 **WordPress-Inspired Ergonomic Sidebar (160px / 52px Collapsed)**:
+  - 160px slim width & 52px collapsed icon mode with zero icon clipping.
+  - Section Group Labels (`MAIN`, `CONTENT`, `USER MANAGEMENT`, `SYSTEM`).
+  - Interactive Accordion Submenus with smooth chevron toggles.
+  - `.no-scrollbar` Visually hidden scrollbar for a clean, minimal aesthetic while preserving 100% mouse wheel / trackpad scrolling.
+  - Fixed sidebar height (`calc(100vh - 2.75rem)`) ensuring submenu expansion never alters sidebar or layout height.
+- ☀️ **Light Mode & 🌙 Dark Mode Sync**: Instant color scheme toggling with `localStorage` state persistence.
+- 📊 **Interactive Dashboard & Data Tables**: 4 Stat Cards, status pills (*Active*, *Pending*, *Blocked*), filters, search `Cmd+K`, export CSV/Excel, row actions (👁️ View, ✏️ Edit, 🗑️ Delete), and pagination.
+- 📄 **16 Dedicated Content Pages**: Sub-routes `/admin/analytics`, `/admin/posts`, `/admin/media`, `/admin/users`, `/admin/security`, `/admin/settings`, `/admin/profile`, etc.
 - 🚀 **Universal Multi-Stack Support**: Native renderer adapters for **Blade Views, Livewire v2/v3, Inertia React, Inertia Vue v2/v3, and REST API**.
-- 📐 **WordPress-Inspired Ergonomic Sidebar**: 160px - 180px slim width sidebar layout with 36px collapsed icon mode, giving 85-90% screen width to main content workspace.
-- 📦 **Auto Resource CRUD Generator**: Fluent `Resource` base class for generating List, Create, Edit, View, and Delete pages automatically.
-- ⚡ **`manggala/laravel-spotlight` Integration**: Native command palette integration for `Cmd+K` navigation.
-- 📋 **`manggala/laravel-datatable` Integration**: Reactive data table log and list rendering.
-- 🛡️ **`manggala/sentinel` WAF Protection**: Integrated WAF security for protecting `/admin/*` routes.
-- ⚙️ **`manggala/laravel-settings` Integration**: Centralized settings manager bridge.
-- 📊 **`manggala/laravel-status-page` Integration**: Real-time system health metrics header badge.
 - 🚀 **Multi-Version Framework Support**: Native support for PHP `^8.2 || ^8.3 || ^8.4` and Laravel `^10.0 || ^11.0 || ^12.0 || ^13.0`.
-- 🛠️ **Artisan Commands**: Commands `panel:install`, `make:panel-resource`, and `panel:info`.
 
 ---
 
@@ -36,11 +44,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Inertia React Adapter**: Renders TypeScript React page components.
 - **Inertia Vue Adapter**: Renders Vue 3 Single File Components.
 - **REST API Adapter**: Renders JSON responses for headless applications.
-
----
-
-## Release Roadmap
-
-- **v1.0.0**: Initial release with core panel builder, 160px slim sidebar layout, Resource CRUD generator, and Blade & Inertia React adapters.
-- **v1.1.0**: Addition of Inertia Vue and Livewire v3 adapters.
-- **v1.2.0**: Addition of custom layout builder and custom widget extensions.
