@@ -38,6 +38,34 @@ class UniversalPanelServiceProvider extends ServiceProvider
         $this->app->singleton('universal-panel', function () {
             return new PanelManager();
         });
+
+        $this->commands([
+            InstallCommand::class,
+            DoctorCommand::class,
+            MakeResourceCommand::class,
+            MakeFormCommand::class,
+            MakeFieldCommand::class,
+            MakeActionCommand::class,
+            MakeFilterCommand::class,
+            MakeColumnCommand::class,
+            MakePageCommand::class,
+            MakeWidgetCommand::class,
+            MakeRelationManagerCommand::class,
+            MakePolicyCommand::class,
+            MakeThemeCommand::class,
+            MakeExporterCommand::class,
+            MakeImporterCommand::class,
+            MakeClusterCommand::class,
+            MakePluginCommand::class,
+            MakeTenantCommand::class,
+            MakeNotificationCommand::class,
+            MakeStepCommand::class,
+            MakeSettingCommand::class,
+            MakePanelCommand::class,
+            MakeUserCommand::class,
+            OptimizeCommand::class,
+            ClearCacheCommand::class,
+        ]);
     }
 
     public function boot(): void
@@ -47,34 +75,6 @@ class UniversalPanelServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'universal-panel');
 
         if ($this->app->runningInConsole()) {
-            $this->commands([
-                InstallCommand::class,
-                DoctorCommand::class,
-                MakeResourceCommand::class,
-                MakeFormCommand::class,
-                MakeFieldCommand::class,
-                MakeActionCommand::class,
-                MakeFilterCommand::class,
-                MakeColumnCommand::class,
-                MakePageCommand::class,
-                MakeWidgetCommand::class,
-                MakeRelationManagerCommand::class,
-                MakePolicyCommand::class,
-                MakeThemeCommand::class,
-                MakeExporterCommand::class,
-                MakeImporterCommand::class,
-                MakeClusterCommand::class,
-                MakePluginCommand::class,
-                MakeTenantCommand::class,
-                MakeNotificationCommand::class,
-                MakeStepCommand::class,
-                MakeSettingCommand::class,
-                MakePanelCommand::class,
-                MakeUserCommand::class,
-                OptimizeCommand::class,
-                ClearCacheCommand::class,
-            ]);
-
             $this->publishes([
                 __DIR__ . '/../config/universal-panel.php' => config_path('universal-panel.php'),
             ], 'universal-panel-config');
