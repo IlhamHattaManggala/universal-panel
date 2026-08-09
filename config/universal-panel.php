@@ -15,7 +15,7 @@ return [
     | Stack yang digunakan untuk merender panel admin:
     | Pilihan: 'blade', 'livewire', 'react', 'vue', 'api'
     */
-    'stack' => env('PANEL_STACK', 'react'),
+    'stack' => env('PANEL_STACK', 'blade'),
 
     /*
     |--------------------------------------------------------------------------

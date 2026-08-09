@@ -8,7 +8,7 @@ class PanelDashboardController extends Controller
 {
     public function index()
     {
-        $stack = config('universal-panel.stack', 'react');
+        $stack = config('universal-panel.stack', 'blade');
 
         if ($stack === 'react' && class_exists(\Inertia\Inertia::class)) {
             return \Inertia\Inertia::render('Dashboard');
