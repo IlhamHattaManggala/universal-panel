@@ -8,23 +8,24 @@
 
 **`manggala/universal-panel`** (Package Name: `universal-panel`) is a modern **Universal Multi-Stack Admin Panel & Resource Builder Framework** for Laravel applications.
 
-It combines an elegant **WordPress-Inspired Ergonomic Sidebar** (ultra-efficient **160px slim width** / **52px collapsed icon mode** with `.no-scrollbar` hidden scrollbar styling) and rich **Interactive Widgets & Data Tables** natively supporting all frontend stack adapters (**Blade Views, Livewire v2/v3, Inertia React, Inertia Vue v2/v3, and REST API**).
+It combines an elegant **WordPress-Inspired Ergonomic Sidebar** (ultra-efficient **160px slim width** / **52px collapsed icon mode** with `.no-scrollbar` hidden scrollbar styling), **Multi-Panel Registration & Dynamic Role Routing** (`/superadmin`, `/admin`), **Permission Management Matrix GUI**, **Full Authentication Suite**, **100% Dynamic Spotlight Quick Search (`Cmd+K` / `Ctrl+K`)**, and rich **Interactive Widgets & Data Tables** natively supporting all frontend stack adapters (**Blade Views, Livewire v2/v3, Inertia React, Inertia Vue v2/v3, and REST API**).
 
 ---
 
 ## 🌟 Key Features
 
-1. **25 Artisan CLI Commands Suite**: Comprehensive generator command suite for creating Resources, Forms, Custom Fields, Actions, Filters, Columns, Policies, Themes, Exporters, Importers, Clusters, Plugins, Tenants, Notifications, Wizard Steps, Settings Pages, and Background Commands.
-2. **Automated System Diagnostics (`universal-panel:doctor`)**: One-command diagnostic engine checking PHP 8.4+, PDO, Mbstring, and Vite asset compilation health.
-3. **WordPress-Inspired Ergonomic Sidebar (160px / 52px Collapsed)**:
+1. **27 Artisan CLI Commands Suite**: Comprehensive generator command suite for creating Resources (`--generate` for auto Model & Migration), Roles (`make:role`), Permission Panel (`make:permission-panel`), Forms, Custom Fields, Actions, Filters, Columns, Policies, Themes, Exporters, Importers, Clusters, Plugins, Tenants, Notifications, Wizard Steps, Settings Pages, and Background Commands.
+2. **Multi-Panel Builder & Dynamic Role Routing**: Register multiple panel instances fluently (`Panel::make('superadmin')->path('superadmin')->role('Superadmin')`) with automatic role-based redirect to `/superadmin` vs `/admin`.
+3. **Full Authentication Suite**: Plug-and-play authentication views for **Sign In** (`/admin/login`), **Register Admin** (`/admin/register`), **Forgot Password** (`/admin/forgot-password`), **Reset Password** (`/admin/reset-password`), and **Sign Out** (`/admin/logout`).
+4. **Permission Management Matrix GUI (`/admin/permissions`)**: Visual role-based access control matrix with checkboxes for module permissions (*Posts, Pages, Media, Users, Security, Settings*).
+5. **100% Dynamic Spotlight Quick Search (`Cmd+K` / `Ctrl+K`)**: Instant search modal automatically discovering registered CRUD resources and system pages with clean SVG icons (Zero Third-Party Dependency).
+6. **WordPress-Inspired Ergonomic Sidebar (160px / 52px Collapsed)**:
    - Compact 160px slim width & 52px collapsed icon mode without icon clipping.
    - Distinct uppercase group section headers (`MAIN`, `CONTENT`, `USER MANAGEMENT`, `SYSTEM`).
    - Interactive Accordion Submenus with smooth chevron arrow indicators.
    - Visually hidden scrollbar (`.no-scrollbar`) providing a minimal design while preserving 100% mouse wheel / trackpad scrollability.
-4. **Light ☀️ & Dark 🌙 Mode Sync**: Instant color scheme switching with automatic `localStorage` state persistence.
-5. **Rich Interactive Dashboard & Data Tables**: 4 Stat Cards, status pills (*Active*, *Pending*, *Blocked*), filters, `Cmd+K` Spotlight search, CSV/Excel exports, row action buttons (👁️ View, ✏️ Edit, 🗑️ Delete), and pagination.
-6. **16 Dedicated Sub-Pages**: Dedicated functional views for `/admin/analytics`, `/admin/posts`, `/admin/media`, `/admin/users`, `/admin/security`, `/admin/settings`, `/admin/profile`, etc.
-7. **Universal Multi-Stack Support**: Single PHP Resource declaration rendered seamlessly across **Blade, Livewire, Inertia React, Inertia Vue, or REST API JSON**.
+7. **Automated System Diagnostics (`universal-panel:doctor`)**: One-command diagnostic engine checking PHP 8.4+, PDO, Mbstring, and Vite asset compilation health.
+8. **Universal Multi-Stack Support**: Single PHP Resource declaration rendered seamlessly across **Blade, Livewire, Inertia React, Inertia Vue, or REST API JSON**. Default stack set to `'blade'` for plug-and-play zero-setup operation out of the box.
 
 ---
 
@@ -38,7 +39,9 @@ It combines an elegant **WordPress-Inspired Ergonomic Sidebar** (ultra-efficient
 | **Frontend Stack Support** | Blade Views, Livewire (v2/v3), Inertia React, Inertia Vue, REST API |
 | **Sidebar Layout Dimensions** | 160px (Expanded Slim) / 52px (Collapsed Icon Mode) |
 | **Scrollbar Styling** | `.no-scrollbar` (Visually Hidden Scrollbar) |
-| **Artisan Commands Suite** | 25 Dedicated Generator & Management Commands |
+| **Artisan Commands Suite** | 27 Dedicated Generator & Management Commands |
+| **Multi-Panel Support** | Fluent API (`Panel::make('superadmin')->path('superadmin')`) |
+| **Quick Search** | `Cmd+K` / `Ctrl+K` Spotlight Modal with Dynamic Resource Discovery |
 | **Testing Engine** | Pest PHP (`pestphp/pest`) |
 
 ---
@@ -62,7 +65,7 @@ php artisan universal-panel:doctor
 
 ---
 
-## 🛠️ Complete 25 Artisan CLI Commands Suite (`php artisan`)
+## 🛠️ Complete 27 Artisan CLI Commands Suite (`php artisan`)
 
 ### 🩺 1. Setup, Maintenance & Diagnostics:
 ```bash
@@ -86,6 +89,15 @@ php artisan universal-panel:clear-cache
 ```bash
 # Create a new Resource CRUD class (e.g. ProductResource)
 php artisan make:panel-resource Product
+
+# Create Resource CRUD + Auto Eloquent Model & Migration
+php artisan make:panel-resource Product --generate
+
+# Create one or multiple roles (single or space/comma separated)
+php artisan make:role Superadmin, Manager, Editor
+
+# Enable and publish Permission Management Panel GUI
+php artisan make:permission-panel
 
 # Create a standalone Form Schema class (e.g. UserProfileForm)
 php artisan make:panel-form UserProfile
@@ -156,13 +168,24 @@ php artisan make:panel-widget SalesOverview --chart
 
 ---
 
-## 📐 Ergonomic Sidebar & Navigation Architecture
+## 🏢 Multi-Panel Registration Example
 
-- **Slim Dimensions (160px / 52px Collapsed)**: Conserves 85-90% of screen width for main workspace content.
-- **Section Group Labels**: Clear uppercase category headers (`MAIN`, `CONTENT`, `USER MANAGEMENT`, `SYSTEM`).
-- **Accordion Submenus**: Smooth expand/collapse toggling for multi-level navigation items (*Posts, Pages, Users, Sentinel WAF, Settings*).
-- **Visually Hidden Scrollbar (`.no-scrollbar`)**: Hides scrollbar thumbs visually for a clean aesthetic while preserving smooth trackpad/wheel scrolling.
-- **Fixed Height Constraint (`calc(100vh - 2.75rem)`)**: Expanding submenus never alters sidebar or layout height.
+Register multiple panel instances in `app/Providers/AppServiceProvider.php`:
+
+```php
+use Manggala\UniversalPanel\Facades\Panel;
+
+// Register Superadmin Panel at /superadmin
+Panel::make('superadmin')
+    ->path('superadmin')
+    ->role('Superadmin')
+    ->title('Superadmin Panel');
+
+// Register Standard Admin Panel at /admin
+Panel::make('admin')
+    ->path('admin')
+    ->role('Admin');
+```
 
 ---
 
@@ -206,14 +229,14 @@ return [
     |--------------------------------------------------------------------------
     | Options: 'blade', 'livewire', 'react', 'vue', 'api'
     */
-    'stack' => env('PANEL_STACK', 'react'),
+    'stack' => env('PANEL_STACK', 'blade'),
 
     /*
     |--------------------------------------------------------------------------
     | Panel Routing Prefix
     |--------------------------------------------------------------------------
     */
-    'prefix' => 'admin',
+    'prefix' => env('PANEL_PREFIX', 'admin'),
 
     /*
     |--------------------------------------------------------------------------
